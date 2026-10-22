@@ -1,0 +1,43 @@
+name: README screenshots
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - '*.css'
+      - '*.js'
+      - 'career.html'
+      - '.github/scripts/capture_readme_screenshots.py'
+      - '.github/workflows/readme-screenshots.yml'
+permissions:
+  contents: write
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install playwright pillow
+      - run: python -m playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 > /tmp/screenshots-server.log 2>&1 &
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8765/ >/dev/null && exit 0; sleep 1; done
+          exit 1
+      - name: Capture real UI
+        env:
+          SCREENSHOT_KIND: planner
+        run: python .github/scripts/capture_readme_screenshots.py
+      - name: Commit screenshots
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/screenshots/desktop.webp docs/screenshots/mobile.webp
+          if ! git diff --cached --quiet; then
+            git commit -m 'docs: refresh real UI screenshots'
+            git push
+          fi
