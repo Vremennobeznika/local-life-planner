@@ -13,3 +13,30 @@ html{background:var(--bg);scroll-behavior:smooth}body{margin:0;background:var(--
 
 /* Touch accessibility: retain the original monochrome design. */
 @media(pointer:coarse){.section-row button,.manager-row button,.bell,.icon-btn{min-width:44px;min-height:44px}.manager-row{flex-wrap:wrap}.manager-row .row-main{flex-basis:100%}.day-nav button{min-height:44px}}
+
+
+/* Android/touch: practical hit areas and settings layout; monochrome design preserved */
+@media(pointer:coarse){
+.main-tab{min-height:44px}
+.manager-row,.section-row{flex-wrap:wrap;align-items:center}
+.manager-row .row-main{flex:0 0 100%;width:100%;min-width:0}
+.section-row .row-main{flex:1 1 calc(100% - 43px);min-width:0}
+.manager-row button:first-of-type,.section-row button:first-of-type{margin-left:auto}
+.manager-row button,.section-row button,.bell,.icon-btn{min-width:44px;min-height:44px}
+input[type=checkbox].check-square{width:44px;height:44px;background:transparent;border:0;position:relative;margin:0;flex:none}
+input[type=checkbox].check-square::before{content:"";position:absolute;left:8.5px;top:8.5px;width:27px;height:27px;border:2px solid #bbb;border-radius:7px;background:#111;box-sizing:border-box}
+input[type=checkbox].check-square:checked{background:transparent;border:0}
+input[type=checkbox].check-square:checked::before{background:#e8e8e8;border-color:#e8e8e8}
+input[type=checkbox].check-square:checked::after{content:"✓";position:absolute;left:13px;top:5px;color:#080808;font-size:21px;line-height:30px;font-weight:800}
+.day-choice{min-height:44px}
+.check-line:not(.compact){min-height:44px}
+}
+@media(max-width:380px){
+.day-nav{display:flex;gap:5px;overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-x:contain;padding-bottom:7px}
+.day-nav button{flex:0 0 44px;min-width:44px;scroll-snap-align:start}
+}
+@media(max-width:330px){
+.main-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+.main-tab{font-size:13px;min-height:44px}
+.status-message{top:105px}
+}
