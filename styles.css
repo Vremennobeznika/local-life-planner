@@ -10,3 +10,6 @@ html{background:var(--bg);scroll-behavior:smooth}body{margin:0;background:var(--
 #taskDateWrap[hidden],#taskDaysWrap[hidden]{display:none!important}
 #taskDateWrap{min-width:0}
 @media(max-width:420px){.reminder-dialog{padding:17px}.reminder-dialog h2{font-size:22px}}
+
+/* Touch accessibility: retain the original monochrome design. */
+@media(pointer:coarse){.section-row button,.manager-row button,.bell,.icon-btn{min-width:44px;min-height:44px}.manager-row{flex-wrap:wrap}.manager-row .row-main{flex-basis:100%}.day-nav button{min-height:44px}}

@@ -1,0 +1,21 @@
+name: Universal planner checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate JavaScript syntax
+        run: |
+          node --check model.js
+          node --check app.js
+          node --check config.js
+          node --check sw.js
+      - name: Unit tests
+        run: node --test tests/*.test.cjs
