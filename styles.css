@@ -40,3 +40,9 @@ input[type=checkbox].check-square:checked::after{content:"✓";position:absolute
 .main-tab{font-size:13px;min-height:44px}
 .status-message{top:105px}
 }
+
+/* Keep shopping category filters visible on narrow screens. */
+@media(max-width:600px){
+.pill-tabs{flex-wrap:wrap;overflow-x:visible}
+.pill-tabs button{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+}
