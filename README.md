@@ -1,5 +1,7 @@
 # МОЯ НЕДЕЛЯ — локальный планировщик
 
+[**Открыть демо**](https://vremennobeznika.github.io/local-life-planner/)
+
 Локальный PWA-планировщик: неделя, покупки, финансы и резервные JSON-копии. HTML / CSS / JavaScript; данные хранятся в браузере.
 
 **Быстрый запуск:** `python3 -m http.server 8000` → http://localhost:8000/.
